@@ -1,6 +1,7 @@
 const routes = require('./routes/usuarioRutas');    // Importa las rutas de usuario
 const express = require('express');
 const mongoose = require('mongoose'); // importamos la librería Mongoose 
+const path = require('path'); // Módulo para rutas absolutas
 const PORT = process.env.PORT || 3000;
 
 
@@ -21,7 +22,9 @@ mongoose.connect(mongoURI, options)
 const app = express();
 
 // Middleware para parsear JSON en las peticiones (body-parser integrado)
-app.use(express.json());    // Permite recibir datos en formato JSON
+app.use(express.json());   // Permite recibir datos en formato JSON
+app.use(express.static(path.join(__dirname, 'public')));
+  // Todo lo de la carpeta public se sirve de forma estática y accesible desde fuera (navegador)
 app.use('/api/usuarios', routes); // Usa las rutas de usuario definidas en usuarioRutas.js
 app.listen(PORT, () => {
   console.log(`Servidor API escuchando en http://localhost:${PORT}`);

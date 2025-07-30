@@ -26,11 +26,14 @@ exports.obtenerUsuarioPorId = async (req, res) => {
 // Crear un nuevo usuario
 exports.crearUsuario = async (req, res) => {
   try {
+console.log(req.body); // Log de los datos recibidos en la petición
+
     const datosUsuario = req.body;            // Obtenemos los datos enviados en la petición
     const nuevo = new Usuario(datosUsuario);  // Creamos un nuevo documento Usuario
     const usuarioGuardado = await nuevo.save();      // Guardamos en la base de datos
     res.status(201).json(usuarioGuardado);    // Devolvemos el usuario creado con código 201 (Creado)
   } catch (error) {
+    console.log(error); // Log del error en la consola
     res.status(500).json({ error: 'Error al crear usuario' }); // Posibles errores de validación
   }
 };

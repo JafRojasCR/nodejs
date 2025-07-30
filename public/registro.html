@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input
+      type="text"
+      name="inputnombre"
+      id="inputnombre"
+      placeholder="Nombre de usuario"
+    />
+    <input
+      type="email"
+      name="inputemail"
+      id="inputemail"
+      placeholder="Correo electrónico"
+    />
+    <input
+      type="password"
+      name="inputpassword"
+      id="inputpassword"
+      placeholder="Contraseña"
+    />
+    <input type="submit" value="Registrar" onclick="registrar()" />
+
+    <script>
+      async function registrar() {
+        const datos = {
+          nombre: document.getElementById("inputnombre").value,
+          email: document.getElementById("inputemail").value,
+          clave: document.getElementById("inputpassword").value,
+        };
+
+        // Enviar datos para crear un nuevo usuario (POST)
+        const respuesta = await fetch("/api/usuarios", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(datos),
+        });
+
+        if (!respuesta.ok) {
+          const error = await respuesta.json();
+          throw new Error(error.error || "Error al registrar usuario");
+        }
+        const resultado = await respuesta.json();
+        console.log("Usuario registrado:", resultado);
+      }
+    </script>
+  </body>
+</html>
