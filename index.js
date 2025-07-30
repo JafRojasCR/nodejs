@@ -1,5 +1,9 @@
+const routes = require('./routes/usuarioRutas');    // Importa las rutas de usuario
 const express = require('express');
 const mongoose = require('mongoose'); // importamos la librería Mongoose 
+const PORT = process.env.PORT || 3000;
+
+
 // URI de conexión a MongoDB (MongoDB Atlas en este caso).  
 // Reemplaza <usuario>, <password> y <tuBase> por tus datos reales. 
 const mongoURI = 'mongodb+srv://2018473:jafet123@cluster0.3ksikky.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'; 
@@ -18,6 +22,7 @@ const app = express();
 
 // Middleware para parsear JSON en las peticiones (body-parser integrado)
 app.use(express.json());    // Permite recibir datos en formato JSON
-
-
-
+app.use('/api/usuarios', routes); // Usa las rutas de usuario definidas en usuarioRutas.js
+app.listen(PORT, () => {
+  console.log(`Servidor API escuchando en http://localhost:${PORT}`);
+});
