@@ -74,6 +74,7 @@
       const colorPicker = document.getElementById("color-picker");
       const btnGuardar = document.getElementById("btn-guardar");
       const btnLimpiar = document.getElementById("btn-limpiar");
+      const token = localStorage.getItem('token'); // Obtener token de localStorage si es necesario
 
       let parteSeleccionada = null; // elemento SVG actualmente seleccionado por el usuario
 
@@ -102,6 +103,31 @@
           el.setAttribute("fill", "#ffffff");
         });
       });
+
+
+      btnGuardar.addEventListener('click', async () => {
+  // Obtener colores actuales de cada parte
+  const datos = {
+    torso: document.getElementById('torso').getAttribute('fill'),
+    mangaizq: document.getElementById('manga-izquierda').getAttribute('fill'),
+    mangader: document.getElementById('manga-derecha').getAttribute('fill'),
+    cuelloizq: document.getElementById('cuelloizq').getAttribute('fill'),
+    cuelloder: document.getElementById('cuelloder').getAttribute('fill')
+  };
+  // Enviar via fetch al servidor
+  const resp = await fetch('/api/camisetas', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token // incluir token si es ruta protegida
+    },
+    body: JSON.stringify(datos)
+  });
+  const data = await resp.json();
+  console.log('Diseño guardado en servidor:', data);
+});
+
+
     </script>
   </body>
 </html>

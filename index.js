@@ -1,10 +1,10 @@
-const routes = require('./routes/usuarioRutas');    // Importa las rutas de usuario
+const userRoutes = require('./routes/usuarioRutas');    // Importa las rutas de usuario
+const camisaRoutes = require('./routes/camisaRutas'); // Importa las rutas de camiseta
 const express = require('express');
 const mongoose = require('mongoose'); // importamos la librería Mongoose 
 const path = require('path'); // Módulo para rutas absolutas
 const PORT = process.env.PORT || 3000;
 const { verificarToken } = require('./seguridad/auth'); // Importa el middleware de autenticación
-
 
 // URI de conexión a MongoDB (MongoDB Atlas en este caso).  
 // Reemplaza <usuario>, <password> y <tuBase> por tus datos reales. 
@@ -14,6 +14,7 @@ const options = {
 useNewUrlParser: true,    // Usa el nuevo parser de URL Mongo 
 useUnifiedTopology: true  // Usa el nuevo motor de manejo de topologías 
 }; 
+
 // Conectarse a la base de datos: 
 mongoose.connect(mongoURI, options) 
 .then(() => console.log('Conectado a MongoDB Atlas'))   // Éxito en la conexión 
@@ -58,7 +59,8 @@ res.sendFile(path.join(__dirname, 'public', 'css', 'header.css')); // Envía el 
 });
 
   // Todo lo de la carpeta public se sirve de forma estática y accesible desde fuera (navegador)
-app.use('/api/usuarios', routes); // Usa las rutas de usuario definidas en usuarioRutas.js
+app.use('/api/usuarios', userRoutes); // Usa las rutas de usuario definidas en usuarioRutas.js
+app.use('/api/camisetas', camisaRoutes); // Usa las rutas de camiseta definidas en camisetaRutas.js
 app.listen(PORT, () => {
   console.log(`Servidor API escuchando en http://localhost:${PORT}`);
 });
