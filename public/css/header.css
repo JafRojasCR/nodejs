@@ -1,34 +1,51 @@
-.header{
-    color: white;
-    width: 100%;
-    height: 60px;
-    background-color: var(--dark-green);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.header {
+  background-color: var(--dark-green);
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
-.header .inner{
-    width: 80%;
-    max-width: 1200px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.header .inner {
+  width: 90%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.headerElement{
-    color: white;
-    text-decoration: none;
-    font-size: 1.2rem;
-    margin: 0 10px;
-    transition: ease 0.3s;
+.header .leftSide h2 {
+  color: var(--white);
+  font-size: 1.5rem;
+  margin: 0;
 }
 
-.headerElement:hover{
-    color: var(--sage);
+.header .rightSide {
+  display: flex;
+  align-items: center;
 }
 
-.active{
-    color: var(--gray-border);
+.headerElement {
+  color: var(--white);
+  text-decoration: none;
+  font-size: 1.1rem;
+  margin: 0 10px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+.headerElement:hover {
+  background-color: var(--forest);
+  color: var(--white);
+}
+
+.active {
+  color: var(--sage);
+  font-weight: bold;
+  border-bottom: 2px solid var(--sage);
+}
