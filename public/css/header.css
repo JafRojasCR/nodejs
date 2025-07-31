@@ -1,0 +1,34 @@
+.header{
+    color: white;
+    width: 100%;
+    height: 60px;
+    background-color: var(--dark-green);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header .inner{
+    width: 80%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.headerElement{
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    margin: 0 10px;
+    transition: ease 0.3s;
+}
+
+.headerElement:hover{
+    color: var(--sage);
+}
+
+.active{
+    color: var(--gray-border);
+}
+

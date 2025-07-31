@@ -65,7 +65,8 @@
           throw new Error(error.error || "Error al registrar usuario");
         }
         const resultado = await respuesta.json();
-        console.log("Usuario registrado:", resultado);
+        alert("Usuario registrado");
+        location.href = `/login`;
       }
     </script>
   </body>

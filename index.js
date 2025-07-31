@@ -49,6 +49,13 @@ app.get('/css/loginreg', (req,res) => {
 res.sendFile(path.join(__dirname, 'public', 'css', 'loginreg.css')); // Envía el archivo loginreg.css
 });
 
+app.get('/css/camiseta', (req,res) => {
+res.sendFile(path.join(__dirname, 'public', 'css', 'camiseta.css')); // Envía el archivo camiseta.css
+});
+
+app.get('/css/header', (req,res) => {
+res.sendFile(path.join(__dirname, 'public', 'css', 'header.css')); // Envía el archivo header.css
+});
 
   // Todo lo de la carpeta public se sirve de forma estática y accesible desde fuera (navegador)
 app.use('/api/usuarios', routes); // Usa las rutas de usuario definidas en usuarioRutas.js
