@@ -7,5 +7,6 @@ router.get('/:id', usuarioControlador.obtenerUsuarioPorId); // Ruta para obtener
 router.post('/', usuarioControlador.crearUsuario); // Ruta para crear un nuevo usuario
 router.put('/:id', usuarioControlador.modificarUsuario); // Ruta para actualizar un usuario
 router.delete('/:id', usuarioControlador.eliminarUsuario); // Ruta para eliminar un usuario
+router.post('/login', usuarioControlador.login); // Ruta para iniciar sesión
 
 module.exports = router;

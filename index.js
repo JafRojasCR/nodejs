@@ -29,4 +29,4 @@ app.use('/api/usuarios', routes); // Usa las rutas de usuario definidas en usuar
 app.listen(PORT, () => {
   console.log(`Servidor API escuchando en http://localhost:${PORT}`);
 });
-// Probar en http://localhost:3000/api/usuarios
+// Probar en http://localhost:3000/registro.html

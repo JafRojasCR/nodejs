@@ -3,28 +3,47 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <link rel="stylesheet" href="./css/loginreg.css" />
+    <title>Registro</title>
   </head>
   <body>
-    <input
-      type="text"
-      name="inputnombre"
-      id="inputnombre"
-      placeholder="Nombre de usuario"
-    />
-    <input
-      type="email"
-      name="inputemail"
-      id="inputemail"
-      placeholder="Correo electrónico"
-    />
-    <input
-      type="password"
-      name="inputpassword"
-      id="inputpassword"
-      placeholder="Contraseña"
-    />
-    <input type="submit" value="Registrar" onclick="registrar()" />
+    <div class="containerMain">
+      <h1>Registro de Usuario</h1>
+      <p>Por favor, completa el siguiente formulario para registrarte.</p>
+
+      <label for="inputnombre">Nombre de usuario</label>
+      <input
+        type="text"
+        name="inputnombre"
+        id="inputnombre"
+        placeholder="Nombre de usuario"
+      />
+
+      <label for="inputemail">Correo electrónico</label>
+      <input
+        type="email"
+        name="inputemail"
+        id="inputemail"
+        placeholder="Correo electrónico"
+      />
+
+      <label for="inputpassword">Contraseña</label>
+      <input
+        type="password"
+        name="inputpassword"
+        id="inputpassword"
+        placeholder="Contraseña"
+      />
+
+      <div class="divBoton">
+        <input type="submit" value="Registrar" onclick="registrar()" />
+      </div>
+      <div class="divMensaje">
+        <p id="mensaje">
+          ¿Ya tienes una cuenta? <a href="login.html">Inicia sesión</a>
+        </p>
+      </div>
+    </div>
 
     <script>
       async function registrar() {

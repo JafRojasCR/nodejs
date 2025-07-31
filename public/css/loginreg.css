@@ -1,0 +1,131 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif !important;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+/* Color Palette */
+:root {
+  --sage: #BEC5AD;
+  --olive: #A4B494;
+  --forest: #519872;
+  --dark-green: #3B5249;
+  --deep-plum: #34252F;
+  --white: #ffffff;
+  --light-gray: #f5f5f5;
+  --gray-border: #dcdcdc;
+}
+
+/* Reset and base styles */
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--light-gray);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Main container */
+.containerMain {
+  background: var(--white);
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 0 0 rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid var(--sage);
+}
+
+/* Header */
+.containerMain h1 {
+  color: var(--dark-green);
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.containerMain p {
+  color: var(--deep-plum);
+  font-size: 0.95rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* Input fields */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  margin: 0.2rem 0 1rem 0;
+  border: 1px solid var(--gray-border);
+  border-radius: 8px;
+  background-color: var(--light-gray);
+  font-size: 1rem;
+  transition: border-color 0.2s ease-in-out, background-color 0.2s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+  border-color: var(--forest);
+  background-color: var(--white);
+  outline: none;
+}
+
+/* Labels */
+label {
+  display: block;
+  margin-bottom: 0.2rem;
+  font-weight: 600;
+  color: var(--olive);
+  font-size: 0.85rem;
+}
+
+/* Submit Button */
+.divBoton button[type="submit"], input[type="submit"] {
+  width: 100%;
+  padding: 0.9rem;
+  background-color: var(--forest);
+  border: none;
+  color: var(--white);
+  font-weight: bold;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.divBoton button[type="submit"]:hover, input[type="submit"]:hover {
+  background-color: var(--dark-green);
+}
+
+.divMensaje{
+    color: var(--deep-plum);
+    font-size: 0.9rem;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.divMensaje p{
+    margin: 0;
+    padding: 0.5rem;
+    background-color: var(--light-gray);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.divMensaje p a{
+    color: var(--forest);
+    text-decoration: none;
+}
+
+
+
+
