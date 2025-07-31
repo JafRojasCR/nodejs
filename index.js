@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose'); // importamos la librería Mongoose 
 const path = require('path'); // Módulo para rutas absolutas
 const PORT = process.env.PORT || 3000;
+const { verificarToken } = require('./seguridad/auth'); // Importa el middleware de autenticación
 
 
 // URI de conexión a MongoDB (MongoDB Atlas en este caso).  
@@ -23,7 +24,32 @@ const app = express();
 
 // Middleware para parsear JSON en las peticiones (body-parser integrado)
 app.use(express.json());   // Permite recibir datos en formato JSON
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
+// Esta que está comentada es para servir archivos estáticos desde la carpeta public, entonces se
+// puede acceder desde el navegador, como: localhost:3000/registro.html
+
+
+// Endpoints para que al ingresar algo como "localhost:3000/registro.html" no sirva, pero que al
+// poner cosas como "localhost:3000/registro" sirva el archivo registro.html
+
+app.get('/camiseta', verificarToken, (req,res) => {
+res.sendFile(path.join(__dirname, 'public', 'camiseta.html')); // Envía el archivo camiseta.html
+});
+
+
+app.get('/registro', (req,res) => {
+res.sendFile(path.join(__dirname, 'public', 'registro.html')); // Envía el archivo registro.html
+});
+
+app.get('/login', (req,res) => {
+res.sendFile(path.join(__dirname, 'public', 'login.html')); // Envía el archivo login.html
+});
+
+app.get('/css/loginreg', (req,res) => {
+res.sendFile(path.join(__dirname, 'public', 'css', 'loginreg.css')); // Envía el archivo loginreg.css
+});
+
+
   // Todo lo de la carpeta public se sirve de forma estática y accesible desde fuera (navegador)
 app.use('/api/usuarios', routes); // Usa las rutas de usuario definidas en usuarioRutas.js
 app.listen(PORT, () => {
