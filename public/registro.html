@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/loginreg" />
+    <link rel="manifest" href="/manifest.json" />
     <title>Registro</title>
   </head>
   <body>
@@ -67,6 +68,20 @@
         const resultado = await respuesta.json();
         alert("Usuario registrado");
         location.href = `/login`;
+      }
+    </script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("/service-worker.js")
+            .then((registration) => {
+              console.log("Service Worker registrado con éxito:", registration);
+            })
+            .catch((err) => {
+              console.log("Fallo en el registro del Service Worker:", err);
+            });
+        });
       }
     </script>
   </body>

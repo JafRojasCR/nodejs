@@ -6,6 +6,7 @@
     <title>Diseño de Camiseta</title>
     <link rel="stylesheet" href="/css/camiseta" />
     <link rel="stylesheet" href="/css/header" />
+    <link rel="manifest" href="/manifest.json" />
   </head>
   <body>
     <div class="header">
@@ -59,14 +60,13 @@
 
         <!--      -->
       </svg>
-       <div class="controls">
-      <input type="color" id="color-picker" value="#ffffff" />
-      <button id="btn-guardar">Guardar Diseño</button>
-      <button id="btn-limpiar">Reiniciar Colores</button>
-    </div>
+      <div class="controls">
+        <input type="color" id="color-picker" value="#ffffff" />
+        <button id="btn-guardar">Guardar Diseño</button>
+        <button id="btn-limpiar">Reiniciar Colores</button>
+      </div>
     </div>
     <!-- Selector de color y botones -->
-   
 
     <script>
       // Referencias a elementos del DOM
@@ -74,7 +74,7 @@
       const colorPicker = document.getElementById("color-picker");
       const btnGuardar = document.getElementById("btn-guardar");
       const btnLimpiar = document.getElementById("btn-limpiar");
-      const token = localStorage.getItem('token'); // Obtener token de localStorage si es necesario
+      const token = localStorage.getItem("token"); // Obtener token de localStorage si es necesario
 
       let parteSeleccionada = null; // elemento SVG actualmente seleccionado por el usuario
 
@@ -104,30 +104,45 @@
         });
       });
 
-
-      btnGuardar.addEventListener('click', async () => {
-  // Obtener colores actuales de cada parte
-  const datos = {
-    torso: document.getElementById('torso').getAttribute('fill'),
-    mangaizq: document.getElementById('manga-izquierda').getAttribute('fill'),
-    mangader: document.getElementById('manga-derecha').getAttribute('fill'),
-    cuelloizq: document.getElementById('cuelloizq').getAttribute('fill'),
-    cuelloder: document.getElementById('cuelloder').getAttribute('fill')
-  };
-  // Enviar via fetch al servidor
-  const resp = await fetch('/api/camisetas', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + token // incluir token si es ruta protegida
-    },
-    body: JSON.stringify(datos)
-  });
-  const data = await resp.json();
-  console.log('Diseño guardado en servidor:', data);
-});
-
-
+      btnGuardar.addEventListener("click", async () => {
+        // Obtener colores actuales de cada parte
+        const datos = {
+          torso: document.getElementById("torso").getAttribute("fill"),
+          mangaizq: document
+            .getElementById("manga-izquierda")
+            .getAttribute("fill"),
+          mangader: document
+            .getElementById("manga-derecha")
+            .getAttribute("fill"),
+          cuelloizq: document.getElementById("cuelloizq").getAttribute("fill"),
+          cuelloder: document.getElementById("cuelloder").getAttribute("fill"),
+        };
+        // Enviar via fetch al servidor
+        const resp = await fetch("/api/camisetas", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token, // incluir token si es ruta protegida
+          },
+          body: JSON.stringify(datos),
+        });
+        const data = await resp.json();
+        console.log("Diseño guardado en servidor:", data);
+      });
+    </script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("/service-worker.js")
+            .then((registration) => {
+              console.log("Service Worker registrado con éxito:", registration);
+            })
+            .catch((err) => {
+              console.log("Fallo en el registro del Service Worker:", err);
+            });
+        });
+      }
     </script>
   </body>
 </html>
