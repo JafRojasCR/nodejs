@@ -8,13 +8,22 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "bcryptjs": "^3.0.2",
+    "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.17.0",
-    "mongoose": "^8.16.0",
+    "mongoose": "^8.17.0",
     "path": "^0.12.7"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JafRojasCR/nodejs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/JafRojasCR/nodejs/issues"
+  },
+  "homepage": "https://github.com/JafRojasCR/nodejs#readme",
+  "description": ""
 }

@@ -1,14 +1,16 @@
+require('dotenv').config();
 const userRoutes = require('./routes/usuarioRutas');    // Importa las rutas de usuario
 const camisaRoutes = require('./routes/camisaRutas'); // Importa las rutas de camiseta
 const express = require('express');
 const mongoose = require('mongoose'); // importamos la librería Mongoose 
 const path = require('path'); // Módulo para rutas absolutas
-const PORT = process.env.PORT || 3000;
-const { verificarToken } = require('./seguridad/auth'); // Importa el middleware de autenticación
+const PORT = process.env.PORT;
+const { verificarToken } = require('./middleware/auth'); // Importa el middleware de autenticación
+
 
 // URI de conexión a MongoDB (MongoDB Atlas en este caso).  
 // Reemplaza <usuario>, <password> y <tuBase> por tus datos reales. 
-const mongoURI = 'mongodb+srv://2018473:jafet123@cluster0.3ksikky.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'; 
+const mongoURI = process.env.MONGO_URI; 
 // Opciones recomendadas para evitar advertencias (según la versión de Mongoose) 
 const options = { 
 useNewUrlParser: true,    // Usa el nuevo parser de URL Mongo 
