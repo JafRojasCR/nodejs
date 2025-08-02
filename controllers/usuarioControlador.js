@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs'); // Importa bcrypt para el hash de contraseñas
 const Usuario = require('../models/usuarioEsquema'); // Importa el modelo de Usuario
 const jwt = require('jsonwebtoken'); // Importa jsonwebtoken para manejar autenticación
+require('dotenv').config();
 
 // Obtener todos los usuarios
 exports.obtenerUsuarios = async (req, res) => {
@@ -95,7 +96,7 @@ exports.login =  async (req, res) => {
     
     // 3. Credenciales válidas: Generar token JWT
     const datosToken = { id: usuario._id };            // Podemos incluir datos en el token (p.ej. el ID de usuario)
-    const secreto = 'SECRETO_SUPER_SEGUR0';            // Clave secreta para firmar el token (en producción, mantener en una variable de entorno)
+    const secreto = process.env.JWT_SECRET;            // Clave secreta para firmar el token (en producción, mantener en una variable de entorno)
     const opciones = { expiresIn: '1h' };              // El token expirará en 1 hora
     const token = jwt.sign(datosToken, secreto, opciones);
     
