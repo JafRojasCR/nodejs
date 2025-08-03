@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Votar por camisetas</title>
+    <link rel="stylesheet" href="/css/header" />
+    <link rel="stylesheet" href="/css/camiseta" />
+    <link rel="manifest" href="/manifest.json" />
+  </head>
+
+  <body>
+    <div class="header">
+      <div class="inner">
+        <div class="leftSide">
+          <h2>Diseña tu Camiseta</h2>
+        </div>
+        <div class="rightSide">
+          <a onclick="redirect(0)" class="headerElement">Diseña tu camiseta</a>
+          <a onclick="redirect(1)" class="headerElement active">Votaciones</a>
+          <a onclick="redirect(2)" class="headerElement">Mi perfil</a>
+          <a onclick="redirect(3)" class="headerElement">Salir</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Selector de color y botones -->
+    <div class="votaciones-container">
+      <h2>Votaciones</h2>
+      <p>Selecciona la camiseta que más te guste:</p>
+      <div class="camisetas-list">
+        <!-- Aquí se generarán las camisetas con JavaScript -->
+      </div>
+    </div>
+
+    <script>
+      // Function to fetch data (this is good as is)
+      async function fetchCamisetas() {
+        try {
+          // Simply remove the id from both parts for it to fetch every shirt
+          const id = "688e6356d1330d21290a8682"; // Example ID currently existing in the database
+          const response = await fetch(`/api/camisetas/${id}`, {
+            method: "GET",
+          });
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return await response.json();
+        } catch (error) {
+          console.error("Error fetching t-shirts:", error);
+          return null; // Return null or an empty array on error
+        }
+      }
+
+      // Function to process and display the data
+      async function main() {
+        const camisetas = await fetchCamisetas();
+        if (camisetas) {
+          console.log("Camisetas obtenidas:", camisetas);
+          // Add more logic here to display camisetas in the DOM, etc.
+        }
+      }
+
+      // Start the application
+      main();
+
+      async function redirect(route) {
+        // Redirigir a la página correspondiente
+        const token = localStorage.getItem("token");
+        switch (route) {
+          case 0:
+            location.href = `/camiseta?token=${encodeURIComponent(token)}`;
+            break;
+
+          case 1:
+            location.href = `/votaciones?token=${encodeURIComponent(token)}`;
+            break;
+          case 2:
+            location.href = `/perfil?token=${encodeURIComponent(token)}`;
+            break;
+
+          case 3:
+            location.href = `/logout?token=${encodeURIComponent(token)}`;
+            break;
+
+          default:
+            window.location.href = "/";
+        }
+      }
+
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("/service-worker.js")
+            .then((registration) => {
+              console.log("Service Worker registrado con éxito:", registration);
+            })
+            .catch((err) => {
+              console.log("Fallo en el registro del Service Worker:", err);
+            });
+        });
+      }
+    </script>
+  </body>
+</html>

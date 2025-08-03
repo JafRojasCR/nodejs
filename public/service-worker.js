@@ -2,12 +2,13 @@ const CACHE_NAME = 'mi-pwa-cache-v1';
 const urlsToCache = [
   '/', // o tu start_url
   '/login.html',
+  '/camiseta.html',
   '/registro.html',
+  '/votaciones.html',
   '/css/loginreg.css',
   '/css/camiseta.css',
   '/css/header.css',
-  '/camiseta.html',
-  '/manifest.json', // Asegúrate de tener un manifest.json];
+  '/manifest.json', // Asegúrate de tener un manifest.json
 ];
 // Evento 'install': se dispara cuando el service worker es instalado
 self.addEventListener('install', event => {

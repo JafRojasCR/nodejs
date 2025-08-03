@@ -13,10 +13,12 @@
       <div class="inner">
         <div class="leftSide"><h2>Diseña tu Camiseta</h2></div>
         <div class="rightSide">
-          <a href="" class="headerElement active">Diseña tu camiseta</a>
-          <a href="/votaciones" class="headerElement">Votaciones</a>
-          <a href="/perfil" class="headerElement">Mi perfil</a>
-          <a href="/logout" class="headerElement">Salir</a>
+          <a onclick="redirect(0)" class="headerElement active"
+            >Diseña tu camiseta</a
+          >
+          <a onclick="redirect(1)" class="headerElement">Votaciones</a>
+          <a onclick="redirect(2)" class="headerElement">Mi perfil</a>
+          <a onclick="redirect(3)" class="headerElement">Salir</a>
         </div>
       </div>
     </div>
@@ -129,6 +131,30 @@
         const data = await resp.json();
         console.log("Diseño guardado en servidor:", data);
       });
+
+      async function redirect(route) {
+        // Redirigir a la página correspondiente
+        const token = localStorage.getItem("token");
+        switch (route) {
+          case 0:
+            location.href = `/camiseta?token=${encodeURIComponent(token)}`;
+            break;
+
+          case 1:
+            location.href = `/votaciones?token=${encodeURIComponent(token)}`;
+            break;
+          case 2:
+            location.href = `/perfil?token=${encodeURIComponent(token)}`;
+            break;
+
+          case 3:
+            location.href = `/logout?token=${encodeURIComponent(token)}`;
+            break;
+
+          default:
+            window.location.href = "/";
+        }
+      }
     </script>
     <script>
       if ("serviceWorker" in navigator) {
