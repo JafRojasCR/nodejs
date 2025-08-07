@@ -7,6 +7,7 @@ router.get('/', verificarToken, camisetaControlador.obtenerCamisas); // Ruta par
 router.get('/:id', verificarToken, camisetaControlador.obtenerCamisaPorId); // Ruta para obtener una camisa
 router.post('/', verificarToken, camisetaControlador.crearCamisa); // Ruta para crear una nueva camisa
 router.put('/:id', verificarToken, camisetaControlador.modificarCamisa); // Ruta para actualizar una camisa
+router.put('/vota/:id', verificarToken, camisetaControlador.votarCamiseta); // Ruta para votar una camisa
 router.delete('/:id', verificarToken, camisetaControlador.eliminarCamisa); // Ruta para eliminar una camisa
 
 module.exports = router;

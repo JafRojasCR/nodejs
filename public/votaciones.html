@@ -23,48 +23,112 @@
         </div>
       </div>
     </div>
-
-    <!-- Selector de color y botones -->
-    <div class="votaciones-container">
-      <h2>Votaciones</h2>
-      <p>Selecciona la camiseta que más te guste:</p>
-      <div class="camisetas-list">
-        <!-- Aquí se generarán las camisetas con JavaScript -->
-      </div>
-    </div>
-
-    
+<h1 class="main-title">
+    <span class="title">Votaciones</span>
+    <span class="subtitle">¡Vota por tus camisetas favoritas!</span>
+</h1>
+    <!-- Contenedor del carrusel -->
+    <div class="carousel" id="contenedor-camisetas"></div>
 
     <script>
-      // Function to fetch data (this is good as is)
-      async function fetchCamisetas() {
+      const token = localStorage.getItem("token"); // Obtener token de localStorage si es necesario
+
+      // carrusel.js
+
+      function generarMiniatura(c) {
+        return `
+<svg class="miniatura" viewBox="1 2 26 14">
+<path d="M 4 8 M 5 3 L 5 6 L 3 7 L 1 5" fill="${c.mangaizq}" />
+<path d="M 9 5 L 7 3 L 5 3 L 5 6 L 5 12 L 13 12 L 13 6 L 13 3 L 11 3" fill="${c.torso}" />
+<path d="M 13 6 L 13 3 L 17 5 L 15 7" fill="${c.mangader}" />
+<path d="M 8 2 L 7 3 L 9 5 L 8 3" fill="${c.cuelloizq}" />
+<path d="M 10 2 L 11 3 L 9 5 L 10 3 M 1 4" fill="${c.cuelloder}" />
+</svg>`;
+      }
+
+      // Función para formatear fecha (ejemplo simple)
+      function formatearFecha(isoDate) {
+        const opciones = { year: "numeric", month: "numeric", day: "numeric" };
+        return new Date(isoDate).toLocaleDateString("es-ES", opciones);
+      }
+
+      // Función principal para cargar las camisetas y generar el carrusel
+      async function cargarCamisetas() {
+              const contenedor = document.getElementById("contenedor-camisetas");
+      contenedor.innerHTML = ""; // Limpiar carrusel
         try {
-          // Simply remove the id from both parts for it to fetch every shirt
-          const response = await fetch(`/api/camisetas/`, {
-            method: "GET",
+          const resp = await fetch("/api/camisetas", {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
           });
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-          return await response.json();
-        } catch (error) {
-          console.error("Error fetching t-shirts:", error);
-          return null; // Return null or an empty array on error
-        }
-      }
-
-      // Function to process and display the data
-      async function main() {
-        const camisetas = await fetchCamisetas();
-        if (camisetas) {
+          const camisetas = await resp.json();
           console.log("Camisetas obtenidas:", camisetas);
-          // Add more logic here to display camisetas in the DOM, etc.
+
+          camisetas.forEach((c) => {
+            let nombre = "Desconocido";
+            if (c.creador && typeof c.creador === "object") {
+              nombre = c.creador.nombre || c.creador.correo || "Usuario";
+            } else if (typeof c.creador === "string") {
+              nombre = c.creador;
+            }
+
+            const calificacion =
+              typeof c.calificacion === "number"
+                ? c.calificacion.toFixed(1)
+                : "0.0";
+
+            const card = document.createElement("div");
+            card.classList.add("card");
+            card.innerHTML = `
+${generarMiniatura(c)}
+<div class="nombre-creador">${nombre}</div>
+<div class="calificacion">Calificación: ⭐ ${calificacion}</div>
+<div class="fecha">${new Date(c.fechaCreacion).toLocaleDateString()}</div>
+<div class="botones-reaccion">
+<button class="btn-like" onclick="reaccion('${c._id}', 1)">Me gusta</button>
+<button class="btn-dislike" onclick="reaccion('${
+              c._id
+            }', -1)">No me gusta</button>
+</div>
+`;
+            contenedor.appendChild(card);
+          });
+        } catch (error) {
+          console.error("Error al cargar camisetas:", error);
         }
       }
 
-      // Start the application
-      main();
+      // Enviar voto a la API y actualizar carrusel
+      async function reaccion(id, valor) {
+        try {
+          const resp = await fetch(`/api/camisetas/vota/${id}`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+            body: JSON.stringify({ calificacion: valor }), // 1 o -1
+          });
 
+          if (resp.ok) {
+            const result = await resp.json();
+            console.log("Actualización exitosa:", result);
+            await cargarCamisetas(); // Refrescar lista después del voto
+          } else {
+            const error = await resp.json();
+            alert("Error al votar: " + error.error);
+          }
+        } catch (error) {
+          alert("Error al conectar con el servidor");
+        }
+      }
+
+      // Cargar las camisetas al iniciar la página
+      cargarCamisetas();
+    </script>
+
+    <script>
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
           navigator.serviceWorker
@@ -78,6 +142,7 @@
         });
       }
     </script>
+
     <script src="/js/redirect.js"></script>
   </body>
 </html>

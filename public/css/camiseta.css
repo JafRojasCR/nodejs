@@ -25,8 +25,6 @@ body {
   background-color: var(--light-gray);
   color: var(--deep-plum);
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
 }
 
 /* ===== Camiseta SVG Section ===== */
@@ -80,3 +78,83 @@ body {
 .controls button:hover {
   background-color: var(--dark-green);
 }
+
+.main-title {
+  text-align: center;
+  margin-top: 2rem;
+  width: 100%;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.title {
+  font-size: 2.5rem;
+  color: var(--deep-plum);
+}
+.subtitle {
+  font-size: 1.2rem;
+  color: var(--forest);
+  margin-top: 0.5rem;
+}
+
+/* Contenedor del carrusel */
+.carousel {
+  width: 90%;
+  margin: 2rem auto;
+  padding: 1rem;
+  height: 60vh;
+  background-color: var(--olive);
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+  scroll-behavior: smooth;        /* Desplazamiento suave */
+  scroll-snap-type: x mandatory; /* Habilita el ajuste al hacer scroll */
+  gap: 1rem;                     /* Espacio entre tarjetas */
+}
+
+/* Tarjetas del carrusel */
+.card {
+  flex-shrink: 0;        /* Evita que la tarjeta se encoja más allá de su contenido */
+  flex-basis: 30%;     /* Ancho base de cada tarjeta (puedes ajustarlo) */
+  scroll-snap-align: start;  /* Encaja al inicio del contenedor al hacer scroll */
+  margin-right: 1rem;    /* Separación entre tarjetas */
+  margin-left: 1rem;
+  border: 1px solid var(--forest);
+  border-radius: 5px;
+  padding: 1rem;
+  background: var(--sage);
+  transition: 300ms ease-in-out;
+  color: white;
+}
+
+.card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-8px);
+}
+
+/* Estilos internos de la tarjeta */
+.shirt-preview {
+  margin-bottom: 0.5rem;
+}
+.nombre-creador{
+  font-size: 1.1rem;
+  font-weight: bold !important;
+  margin: 0.5rem 0 0.25rem;
+}
+.calificacion, .fecha {
+  font-size: 0.9rem;
+  margin: 0.25rem 0;
+}
+.btn-like, .btn-dislike {
+  margin: 0.5rem 0.5rem 0 0;
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 3px;
+  transition: 100ms ease-in-out;
+  cursor: pointer;
+}
+.btn-like { background-color: var(--dark-green) !important; color: #fff !important; }
+.btn-dislike { background-color: #661812 !important; color: #fff !important; }
+.btn-like:hover { background-color: var(--forest) !important; }
+.btn-dislike:hover { background-color: #e53935 !important; }
