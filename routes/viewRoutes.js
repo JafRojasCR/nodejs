@@ -41,4 +41,8 @@ router.get("/votaciones", verificarToken, (req, res) => {
   res.sendFile(path.join(__dirname, "../public", "votaciones.html")); // Envía el archivo votaciones.html
 });
 
+router.get("/logout", (req, res) => {
+  res.redirect("/login"); // Redirige a la página de login después de cerrar sesión
+});
+
 module.exports = router;

@@ -1,3 +1,8 @@
+/*
+|--------------------------------------------------------------------------
+| Header
+|--------------------------------------------------------------------------
+*/
 .header {
   background-color: var(--dark-green);
   height: 60px;
@@ -8,6 +13,8 @@
   position: sticky;
   top: 0;
   z-index: 1000;
+  /* Header will also fade in */
+  animation: fadeIn 0.4s ease-out forwards;
 }
 
 .header .inner {
@@ -33,15 +40,18 @@
   color: var(--white);
   text-decoration: none;
   font-size: 1.1rem;
-  margin: 0 10px;
+  margin: 0 var(--spacing-sm);
   padding: 6px 10px;
-  border-radius: 6px;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  border-radius: var(--border-radius);
+  /* Added transitions for a smoother hover effect */
+  transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease, transform 0.1s ease;
 }
 
 .headerElement:hover {
   background-color: var(--forest);
   color: var(--white);
+  /* A small scale-up on hover */
+  transform: scale(1.05);
 }
 
 .active {

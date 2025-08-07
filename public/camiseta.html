@@ -230,8 +230,8 @@
             new Date(c.fechaCreacion).toLocaleString(), // Columna 2: Fecha de creación en formato legible
             nombreCreador, // Columna 3: Nombre/Correo del creador (nuevo campo)
             // Columna 4: Botones de acciones (Modificar/Eliminar), con el ID incrustado en la llamada
-            `<button onclick='editarCamiseta("${c._id}")'>Modificar</button>
-     <button onclick='eliminarCamiseta("${c._id}")'>Eliminar</button>`,
+            `<button class='btn-like' onclick='editarCamiseta("${c._id}")'>Modificar</button>
+     <button class='btn-dislike' onclick='eliminarCamiseta("${c._id}")'>Eliminar</button>`,
           ]);
         });
 
