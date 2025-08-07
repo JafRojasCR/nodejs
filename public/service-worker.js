@@ -8,6 +8,7 @@ const urlsToCache = [
   '/css/loginreg.css',
   '/css/camiseta.css',
   '/css/header.css',
+  '/js/redirect.js',
   '/manifest.json', // Asegúrate de tener un manifest.json
 ];
 // Evento 'install': se dispara cuando el service worker es instalado

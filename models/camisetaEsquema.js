@@ -2,7 +2,7 @@
 const { Schema, model } = require('mongoose');
 
 const camisetaSchema = new Schema({
-  // creador: { type: Schema.Types.ObjectId, ref: 'Usuario' },
+  creador: { type: Schema.Types.ObjectId, ref: 'Usuario' }, // Referencia al creador de la camiseta
   torso: String,
   mangaizq: String,
   mangader: String,

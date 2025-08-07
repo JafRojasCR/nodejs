@@ -33,13 +33,14 @@
       </div>
     </div>
 
+    
+
     <script>
       // Function to fetch data (this is good as is)
       async function fetchCamisetas() {
         try {
           // Simply remove the id from both parts for it to fetch every shirt
-          const id = "688e6356d1330d21290a8682"; // Example ID currently existing in the database
-          const response = await fetch(`/api/camisetas/${id}`, {
+          const response = await fetch(`/api/camisetas/`, {
             method: "GET",
           });
           if (!response.ok) {
@@ -64,30 +65,6 @@
       // Start the application
       main();
 
-      async function redirect(route) {
-        // Redirigir a la página correspondiente
-        const token = localStorage.getItem("token");
-        switch (route) {
-          case 0:
-            location.href = `/camiseta?token=${encodeURIComponent(token)}`;
-            break;
-
-          case 1:
-            location.href = `/votaciones?token=${encodeURIComponent(token)}`;
-            break;
-          case 2:
-            location.href = `/perfil?token=${encodeURIComponent(token)}`;
-            break;
-
-          case 3:
-            location.href = `/logout?token=${encodeURIComponent(token)}`;
-            break;
-
-          default:
-            window.location.href = "/";
-        }
-      }
-
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
           navigator.serviceWorker
@@ -101,5 +78,6 @@
         });
       }
     </script>
+    <script src="/js/redirect.js"></script>
   </body>
 </html>
